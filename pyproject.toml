@@ -1,0 +1,53 @@
+[project]
+name = "fast-zero"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Your Name",email = "you@example.com"}
+]
+readme = "README.md"
+# requires-python = ">=3.13"
+requires-python = "3.13.*"
+dependencies = [
+    "fastapi[standard] (>=0.115.13,<0.116.0)"
+]
+
+[tool.poetry]
+packages = [{include = "fast_zero", from = "src"}]
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.12.0"
+pytest = "^8.4.1"
+pytest-cov = "^6.2.1"
+taskipy = "^1.14.1"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 79
+extend-exclude = ['migrations']
+
+[tool.ruff.lint]
+preview = true
+select = ['I','F','E','W','PL','PT']
+
+[tool.ruff.format]
+preview = true
+quote-style = 'single'
+
+[tool.pytest.ini_options]
+pythonpath = "."
+addopts = '-p no:warnings'
+
+[tool.taskipy.tasks]
+run_fastapi = 'fastapi dev src/fast_zero/app_dedezao.py    --host 127.0.0.1 --port 1900' # 'fastapi dev src/fast_zero/app_dedezao.py'
+run_uvicorn = 'uvicorn fast_zero.app_dedezao:app_dedezinho --host 127.0.0.1 --port 1900' # 'uvicorn fast_zero.app_dedezao:app_dedezinho'
+testinho = 'pytest --cov=src/fast_zero -vv'
+lint = 'ruff check . && ruff check . --diff' 
+format = 'ruff check . --fix && ruff format .'
+# exemplo de pre e pos... eh so tirar o hashtag de comentario que funciona
+# pre_testinho = 'task lint'
+# pos_testinho = 'coverage html'
