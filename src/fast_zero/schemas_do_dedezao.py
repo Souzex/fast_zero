@@ -1,4 +1,6 @@
 
+# Meus super esquemas
+
 from pydantic import BaseModel, EmailStr
 
 class Mensagem(BaseModel):
