@@ -33,7 +33,7 @@ def testaozao_read_root_html_deve_retornar_ok_e_ola_mundo(clientao):
     </html> """
     # return None    
     
-def test_create_user(clientao):
+def testezinho_create_user(clientao):
     # clientao = TestClient(app_dedezinho)
     resposta = clientao.post(
         '/users/',
@@ -50,7 +50,7 @@ def test_create_user(clientao):
         'id': 1,
     }
     
-def test_read_users(clientao):
+def testezinho_read_users(clientao):
     # clientao = TestClient(app_dedezinho)
     resposta = clientao.get('/users/')
     assert resposta.status_code == HTTPStatus.OK
@@ -61,7 +61,7 @@ def test_read_users(clientao):
         },
     ] }
 
-def test_get_user_primeiro(clientao):
+def testezinho_get_user_primeiro(clientao):
     # clientao = TestClient(app_dedezinho)
     resposta = clientao.get('/users/1')
     assert resposta.status_code == HTTPStatus.OK
@@ -71,7 +71,7 @@ def test_get_user_primeiro(clientao):
         'id': 1
     }
     
-def test_update_user(clientao):
+def testezinho_update_user(clientao):
     # clientao = TestClient(app_dedezinho)
     resposta = clientao.put(
         '/users/1',
@@ -89,7 +89,7 @@ def test_update_user(clientao):
         'id': 1
     }
 
-def test_get_user_segundo(clientao):
+def testezinho_get_user_segundo(clientao):
     # clientao = TestClient(app_dedezinho)
     resposta = clientao.get('/users/1')
     assert resposta.status_code == HTTPStatus.OK
@@ -99,7 +99,7 @@ def test_get_user_segundo(clientao):
         'id': 1
     }
     
-def test_delete_user(clientao):
+def testezinho_delete_user(clientao):
     # clientao = TestClient(app_dedezinho)
     resposta = clientao.delete('/users/1')
     assert resposta.status_code == HTTPStatus.OK
