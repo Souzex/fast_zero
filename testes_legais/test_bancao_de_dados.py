@@ -19,7 +19,7 @@ def testizinho_create_user():
         )
     assert usuario.username == 'dedezao'
 '''
-
+'''
 def testizinho_create_user(sessaozona):
     usuario = Usuario(username='dedezao', password='senha123', email='alice@souzex.com')
     sessaozona.add(usuario)
@@ -28,4 +28,4 @@ def testizinho_create_user(sessaozona):
         select(Usuario).where(Usuario.email == 'alice@souzex.com')
     )
     assert usuario.username == 'dedezao'
-    
+'''

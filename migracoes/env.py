@@ -6,8 +6,8 @@ from sqlalchemy import pool
 from alembic import context
 
 # Adicionado por mim
-from src.fast_zero.modelitos_dede import tabela_registro
-from src.fast_zero.configuracoes import ConfiguracoesLegais
+from src.fast_zero.modelitos_dede import tabela_registro    # NAO tem relacao direta com as informacoes de conexao do banco de dados (APENAS do modelo)
+from src.fast_zero.configuracoes import ConfiguracoesLegais # TEM relacao direta com as informacoes de conexao do banco de dados
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

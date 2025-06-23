@@ -12,6 +12,7 @@ class Usuario:
     password: Mapped[str]
     email: Mapped[str] = mapped_column(unique=True)
     created_at: Mapped[datetime] = mapped_column(init=False, server_default=func.now()) # o 'now' é do servidor do banco de dados
-    updated_at: Mapped[datetime] = mapped_column(init=False, onupdate=func.now()) # o 'now' é do servidor do banco de dados
+    # updated_at: Mapped[datetime] = mapped_column(init=False, onupdate=func.now()) # o 'now' é do servidor do banco de dados
+    
     
     

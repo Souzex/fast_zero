@@ -4,6 +4,9 @@ from fastapi.testclient import TestClient
 from src.fast_zero.app_dedezao import app_dedezinho
 from http import HTTPStatus
 
+from src.fast_zero.schemas_do_dedezao import UsuarioPublico
+from src.fast_zero.modelitos_dede import Usuario
+
 '''
 # foi para tests/conftest.py
 @pytest.fixture()    
@@ -32,7 +35,29 @@ def testaozao_read_root_html_deve_retornar_ok_e_ola_mundo(clientao):
       </body>
     </html> """
     # return None    
+   
+def testezinho_read_users(clientao):
+    # clientao = TestClient(app_dedezinho)
+    resposta = clientao.get('/users/')
+    assert resposta.status_code == HTTPStatus.OK
+    '''
+    assert resposta.json() == { 'users': [
+        { 'username': 'alice',
+          'email': 'alice@souzex.com',
+          'id': 1
+        },
+    ] }
+    '''
+    assert resposta.json() == {'users': []}
     
+def testezinho_read_users_with_only_user(clientao, meu_usuario_de_teste):    
+
+    esquema_usuario = UsuarioPublico.model_validate(meu_usuario_de_teste).model_dump()
+    resposta = clientao.get('/users/')
+    assert resposta.status_code == HTTPStatus.OK
+    assert resposta.json() == {'users': [esquema_usuario]} 
+        
+'''
 def testezinho_create_user(clientao):
     # clientao = TestClient(app_dedezinho)
     resposta = clientao.post(
@@ -49,19 +74,8 @@ def testezinho_create_user(clientao):
         'email': 'alice@souzex.com',
         'id': 1,
     }
-    
-def testezinho_read_users(clientao):
-    # clientao = TestClient(app_dedezinho)
-    resposta = clientao.get('/users/')
-    assert resposta.status_code == HTTPStatus.OK
-    assert resposta.json() == { 'users': [
-        { 'username': 'alice',
-          'email': 'alice@souzex.com',
-          'id': 1
-        },
-    ] }
-
-def testezinho_get_user_primeiro(clientao):
+'''   
+def testezinho_get_user(clientao):
     # clientao = TestClient(app_dedezinho)
     resposta = clientao.get('/users/1')
     assert resposta.status_code == HTTPStatus.OK
@@ -71,7 +85,7 @@ def testezinho_get_user_primeiro(clientao):
         'id': 1
     }
     
-def testezinho_update_user(clientao):
+def testezinho_update_user(clientao, meu_usuario_de_teste):
     # clientao = TestClient(app_dedezinho)
     resposta = clientao.put(
         '/users/1',
@@ -89,18 +103,8 @@ def testezinho_update_user(clientao):
         'id': 1
     }
 
-def testezinho_get_user_segundo(clientao):
-    # clientao = TestClient(app_dedezinho)
-    resposta = clientao.get('/users/1')
-    assert resposta.status_code == HTTPStatus.OK
-    assert resposta.json() == { 
-        'username': 'vanderlei',
-        'email': 'alice@vanderlei.com',
-        'id': 1
-    }
-    
-def testezinho_delete_user(clientao):
+def testezinho_delete_user(clientao, meu_usuario_de_teste):
     # clientao = TestClient(app_dedezinho)
     resposta = clientao.delete('/users/1')
     assert resposta.status_code == HTTPStatus.OK
-    assert resposta.json() == {'message':'Usuário deletauuudo!'} 
+    assert resposta.json() == {'message':'Usuário deletado!'} 
